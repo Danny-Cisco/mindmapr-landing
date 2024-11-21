@@ -67,36 +67,12 @@
       }
 
       .left p {
-        font-size: clamp(1rem, 2vw, 1.2rem);
+        /* font-size: clamp(1rem, 2vw, 1.2rem); */
         color: var(--text-secondary);
         margin-bottom: 1rem;
         animation: fadeIn 1s ease-out;
         width: fit-content;
-        margin-inline: auto;
-      }
-
-      .button {
-        margin-top: 2rem;
-        animation: fadeIn 1.2s ease-out;
-      }
-
-      .button a {
-        display: inline-block;
-        padding: 1rem 2rem;
-        background: var(--primary);
-        color: white;
-        text-decoration: none;
-        border-radius: 9999px;
-        font-size: clamp(1rem, 1.5vw, 1.25rem);
-        font-weight: 600;
-        transition: all 0.3s ease;
-        box-shadow: 0 4px 20px rgba(255, 0, 255, 0.2);
-      }
-
-      .button a:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 6px 25px rgba(255, 0, 255, 0.3);
-        background: var(--primary-dark);
+        /* margin-inline: auto; */
       }
 
       .right {
@@ -113,6 +89,102 @@
         object-fit: cover;
         border-radius: 20px;
         box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+      }
+
+      /* Modal styles */
+      .modal {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: rgba(255, 255, 255, 1);
+        z-index: 1000;
+        opacity: 0;
+        transform: scale(1);
+        visibility: hidden;
+        transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
+      }
+
+      .lefty {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        width: fit-content;
+        max-width: 250px;
+        /* margin-inline: auto; */
+      }
+
+      .modal.active {
+        opacity: 1;
+        transform: scale(1);
+        visibility: visible;
+      }
+
+      .modal.hidden {
+        opacity: 0;
+        transform: scale(0.9);
+        visibility: hidden;
+      }
+
+      .modal-content {
+        background: white;
+        padding: 0rem;
+        border-radius: 15px;
+        position: relative;
+        width: 90%;
+        max-width: 600px;
+        margin: auto;
+      }
+
+      .close-modal {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        background: none;
+        border: none;
+        font-size: 2.5rem;
+        cursor: pointer;
+        font-weight: 100;
+        color: magenta;
+      }
+
+      .subscribe-button {
+        background: linear-gradient(
+          to right,
+          var(--primary),
+          var(--primary-dark)
+        );
+        color: white;
+        border: none;
+        padding: 1rem 2rem;
+        border-radius: 8px;
+        font-size: 1.1rem;
+        cursor: pointer;
+        transition: transform 0.2s ease;
+        margin-top: 1rem;
+      }
+
+      .subscribe-button:hover {
+        transform: translateY(-2px);
+      }
+
+      /* Brevo form iframe styles */
+      .brevo-form-wrapper {
+        width: 100%;
+        max-width: 540px;
+        margin: 0 auto;
+      }
+
+      .brevo-form-wrapper iframe {
+        width: 100%;
+        height: 90vh;
+        border: none;
+        margin: 0 auto;
+        display: block;
       }
 
       @keyframes fadeIn {
@@ -137,7 +209,7 @@
 
       @media (max-width: 1024px) {
         .container {
-          padding: 1.5rem;
+          padding: 0.5rem;
           gap: 2rem;
         }
 
@@ -150,7 +222,11 @@
         .container {
           flex-direction: column;
           text-align: center;
-          padding: 2rem 1rem;
+          padding: 1rem 0.5rem;
+        }
+
+        .lefty {
+          margin-inline: auto;
         }
 
         .left,
@@ -160,7 +236,7 @@
 
         .logo {
           width: 300px;
-          margin: 0 auto 2rem auto;
+          margin: 0 -70px 0 auto;
         }
 
         .right {
@@ -174,15 +250,9 @@
           object-fit: cover;
         }
 
-        .button {
-          display: flex;
-          justify-content: center;
-        }
-
-        .button a {
-          width: 100%;
-          max-width: 300px;
-          text-align: center;
+        .modal-content {
+          width: 95%;
+          padding: 0.25rem;
         }
       }
     </style>
@@ -192,16 +262,70 @@
       <div class="left">
         <img src="logo.svg" alt="MindMapr Logo" class="logo" />
         <h1>MindMapr.ai</h1>
-        <p>Complete hardware solutions in next gen AI meeting rooms.</p>
-        <p>Coming soon...</p>
-        <p>Join our mailing list to find out more.</p>
-        <div class="button">
-          <a href="#">Join Mailing List</a>
+        <div class="lefty">
+          <p>Complete hardware solutions for next-gen AI meeting rooms.</p>
         </div>
+
+        <button class="subscribe-button" onclick="openModal()">
+          Join our mailing list
+        </button>
       </div>
       <div class="right">
         <img src="hero-image.png" alt="MindMapr Design" />
       </div>
     </div>
+
+    <!-- Modal -->
+    <div class="modal" id="newsletterModal">
+      <div class="modal-content">
+        <button class="close-modal" onclick="closeModal()">&times;</button>
+        <div class="brevo-form-wrapper">
+          <iframe
+            width="540"
+            height="305"
+            src="https://41faa0ad.sibforms.com/serve/MUIFAAYNAXfzVhOnXrqbruIpmzmoOEQUFGesJ1iEph4B2cy8nSgfy4EiioqUopo9AfWaMN1Y_GKBp2af-s21YytoHGjWLfBiXQ9rXs2rdTP3BJTzWA4fQ_QfZgzfimX0EtjCkmcn61wrjGyNUftxD_QyDaGM-FeaJqcgUNKDbI_-84Oh2uSVyEUw-FIDL_QFt8jJcYerEeyRwWnQ"
+            frameborder="0"
+            scrolling="auto"
+            allowfullscreen
+            style="
+              display: block;
+              margin-left: auto;
+              margin-right: auto;
+              max-width: 100%;
+            "
+          ></iframe>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function openModal() {
+        const modal = document.getElementById("newsletterModal");
+        modal.classList.remove("hidden");
+        modal.classList.add("active");
+        document.body.style.overflow = "hidden";
+      }
+
+      function closeModal() {
+        const modal = document.getElementById("newsletterModal");
+        modal.classList.remove("active");
+        modal.classList.add("hidden");
+        document.body.style.overflow = "";
+      }
+
+      document
+        .getElementById("newsletterModal")
+        .addEventListener("click", (e) => {
+          if (e.target.id === "newsletterModal") {
+            closeModal();
+          }
+        });
+
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") {
+          closeModal();
+        }
+      });
+    </script>
   </body>
 </html>
