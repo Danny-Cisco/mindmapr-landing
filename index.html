@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MindMapr.ai</title>
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      :root {
+        --primary: #ff00ff;
+        --primary-dark: #cc00cc;
+        --text-primary: #2d3748;
+        --text-secondary: #4a5568;
+      }
+
+      body {
+        margin: 0;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+          Roboto, sans-serif;
+        min-height: 100vh;
+        background: #fff;
+        color: var(--text-primary);
+        line-height: 1.6;
+        overflow-x: hidden;
+      }
+
+      .container {
+        display: flex;
+        min-height: 100vh;
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 2rem;
+        gap: 4rem;
+        align-items: center;
+      }
+
+      .left {
+        flex: 1;
+        position: relative;
+      }
+
+      .logo {
+        width: 400px;
+        height: auto;
+        margin-bottom: 0rem;
+        animation: fadeIn 0.8s ease-out;
+      }
+
+      .left h1 {
+        font-size: clamp(2.5rem, 5vw, 4rem);
+        background: linear-gradient(
+          to right,
+          var(--primary),
+          var(--primary-dark)
+        );
+        -webkit-background-clip: text;
+        color: transparent;
+        margin-bottom: 1rem;
+        animation: slideIn 0.8s ease-out;
+      }
+
+      .left p {
+        font-size: clamp(1rem, 2vw, 1.2rem);
+        color: var(--text-secondary);
+        margin-bottom: 1rem;
+        animation: fadeIn 1s ease-out;
+        width: fit-content;
+        margin-inline: auto;
+      }
+
+      .button {
+        margin-top: 2rem;
+        animation: fadeIn 1.2s ease-out;
+      }
+
+      .button a {
+        display: inline-block;
+        padding: 1rem 2rem;
+        background: var(--primary);
+        color: white;
+        text-decoration: none;
+        border-radius: 9999px;
+        font-size: clamp(1rem, 1.5vw, 1.25rem);
+        font-weight: 600;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 20px rgba(255, 0, 255, 0.2);
+      }
+
+      .button a:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 25px rgba(255, 0, 255, 0.3);
+        background: var(--primary-dark);
+      }
+
+      .right {
+        flex: 1;
+        height: 90vh;
+        position: relative;
+        overflow: hidden;
+        animation: slideIn 1s ease-out;
+      }
+
+      .right img {
+        width: auto;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 20px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      @keyframes slideIn {
+        from {
+          opacity: 0;
+          transform: translateX(-20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      @media (max-width: 1024px) {
+        .container {
+          padding: 1.5rem;
+          gap: 2rem;
+        }
+
+        .logo {
+          width: 300px;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .container {
+          flex-direction: column;
+          text-align: center;
+          padding: 2rem 1rem;
+        }
+
+        .left,
+        .right {
+          width: 100%;
+        }
+
+        .logo {
+          width: 300px;
+          margin: 0 auto 2rem auto;
+        }
+
+        .right {
+          height: 70vh;
+          margin-top: 2rem;
+        }
+
+        .right img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+
+        .button {
+          display: flex;
+          justify-content: center;
+        }
+
+        .button a {
+          width: 100%;
+          max-width: 300px;
+          text-align: center;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="left">
+        <img src="logo.svg" alt="MindMapr Logo" class="logo" />
+        <h1>MindMapr.ai</h1>
+        <p>Complete hardware solutions in next gen AI meeting rooms.</p>
+        <p>Coming soon...</p>
+        <p>Join our mailing list to find out more.</p>
+        <div class="button">
+          <a href="#">Join Mailing List</a>
+        </div>
+      </div>
+      <div class="right">
+        <img src="hero-image.png" alt="MindMapr Design" />
+      </div>
+    </div>
+  </body>
+</html>
